@@ -1,8 +1,9 @@
 import { atom } from 'recoil'
 import type { Task } from '@/types'
+import { AtomKeys } from '@/constants'
 
 export const tasksState = atom<Task[]>({
-  key: 'tasks',
+  key: AtomKeys.TASK,
   default: [
     {
       id: 1,
