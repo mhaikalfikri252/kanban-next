@@ -1,3 +1,5 @@
-export default function Page(){
-    return <p>Task List</p>
+import TaskList from '@/components/task-list/TaskList'
+
+export default function Page() {
+  return <TaskList />
 }
