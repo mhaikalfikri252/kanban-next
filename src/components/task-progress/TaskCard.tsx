@@ -1,8 +1,7 @@
 import type { Task } from '@/types'
 import { TASK_PROGRESS_ID } from '@/constants'
 import TaskIcon from '../TaskIcon'
-import { useRecoilState } from 'recoil'
-import { tasksState } from '@/features/taskAtoms'
+import { useTasksAction } from '@/hooks/useTasksAction'
 
 interface TaskCardProps {
   task: Task
@@ -10,14 +9,7 @@ interface TaskCardProps {
 
 const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
   const isStarted = task.progressOrder === TASK_PROGRESS_ID.NOT_STARTED
-  const [tasks, setTasks] = useRecoilState<Task[]>(tasksState)
-
-  const moveTaskCard = (taskId: number, directionNumber: 1 | -1): void => {
-    const updatedTasks: Task[] = tasks.map((task) =>
-      task.id === taskId ? { ...task, progressOrder: task.progressOrder + directionNumber } : task,
-    )
-    setTasks(updatedTasks)
-  }
+  const { moveTaskCard } = useTasksAction()
 
   return (
     <div className="bg-green-200 p-6 rounded-xl my-2 flex flex-col gap-y-2 text-xl relative">
