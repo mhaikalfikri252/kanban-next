@@ -1,5 +1,6 @@
 import type { Task } from '@/types'
 import { TASK_PROGRESS_ID, TASK_PROGRESS_STATUS } from '@/constants'
+import TaskIcon from '../TaskIcon'
 
 interface TaskListItemProps {
   task: Task
@@ -24,7 +25,8 @@ const TaskListItem = ({ task }: TaskListItemProps): JSX.Element => {
   return (
     <div className="flex items-stretch border-b border-b-gray-300 text-xl relative *:p-4 *:items-center *:border-r-gray-300">
       <div className="w-1/4 border-r">
-        <span className="material-icons">check_circle</span>
+        <TaskIcon task={task} />
+        {task.title}
       </div>
       <div className="w-[30%] border-r">{task.detail}</div>
       <div className="w-1/5 border-r">{task.dueDate}</div>
