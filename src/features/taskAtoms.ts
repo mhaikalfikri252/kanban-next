@@ -3,7 +3,7 @@ import type { Task } from '@/types'
 import { AtomKeys } from '@/constants'
 
 export const tasksState = atom<Task[]>({
-  key: AtomKeys.TASK,
+  key: AtomKeys.TASKS,
   default: [
     {
       id: 1,

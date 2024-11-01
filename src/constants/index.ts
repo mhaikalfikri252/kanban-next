@@ -13,11 +13,11 @@ export const TASK_PROGRESS_ID = {
 }
 
 export const AtomKeys = {
-  TASK: 'task',
+  TASKS: 'tasks',
 }
 
 export const SelectorKeys = {
-  UN_COMPLETED_TASKS: 'uncompletedTasks',
+  UNCOMPLETED_TASKS: 'uncompletedTasks',
   NOT_STARTED_TASKS: 'notStartedTasks',
   IN_PROGRESS_TASKS: 'inProgressTasks',
   WAITING_TASKS: 'waitingTasks',

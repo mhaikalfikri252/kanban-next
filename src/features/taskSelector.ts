@@ -31,7 +31,7 @@ export const waitingTasksSelector = selector<Task[]>({
 })
 
 export const uncompletedTasksSelector = selector<Task[]>({
-  key: SelectorKeys.UN_COMPLETED_TASKS,
+  key: SelectorKeys.UNCOMPLETED_TASKS,
   get: ({ get }) => {
     return get(tasksState).filter((task) => {
       return task.progressOrder !== 4
