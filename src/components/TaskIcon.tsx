@@ -19,6 +19,8 @@ const TaskIcon = ({ task }: TaskIconProps) => {
     setTasks(updatedTasks)
   }
 
+  
+
   return (
     <div
       className={`material-icons mr-4 text-3xl ${isProgressCompleted ? 'text-green-500 cursor-default' : 'text-grey-400 cursor-pointer'}`}
