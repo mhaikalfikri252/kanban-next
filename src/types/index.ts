@@ -5,3 +5,8 @@ export interface Task {
   dueDate: string
   progressOrder: number
 }
+
+export const TASK_MODAL_TYPE = {
+  ADD: 'add',
+  EDIT: 'edit',
+}
