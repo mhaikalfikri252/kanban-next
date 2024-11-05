@@ -1,6 +1,8 @@
 import type { Task } from '@/types'
 import { TASK_PROGRESS_ID, TASK_PROGRESS_STATUS } from '@/constants'
 import TaskIcon from '../TaskIcon'
+import React, { useState } from 'react'
+import TaskMenu from '../TaskMenu'
 
 interface TaskListItemProps {
   task: Task
@@ -22,6 +24,8 @@ const getProgressCategory = (progressOrder: number): string => {
 }
 
 const TaskListItem = ({ task }: TaskListItemProps): JSX.Element => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+
   return (
     <div className="flex items-stretch border-b border-b-gray-300 text-xl relative *:p-4 *:items-center *:border-r-gray-300">
       <div className="w-1/4 border-r">
@@ -31,8 +35,11 @@ const TaskListItem = ({ task }: TaskListItemProps): JSX.Element => {
       <div className="w-[30%] border-r">{task.detail}</div>
       <div className="w-1/5 border-r">{task.dueDate}</div>
       <div className="w-[15%] border-r-0">{getProgressCategory(task.progressOrder)}</div>
-      <div>
-        <span className="material-icons">more_horiz</span>
+      <div className="relative">
+        <span className="material-icons cursor-pointer" onClick={(): void => setIsMenuOpen(true)}>
+          more_horiz
+        </span>
+        {isMenuOpen && <TaskMenu task={task} setIsMenuOpen={setIsMenuOpen} />}
       </div>
     </div>
   )

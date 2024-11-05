@@ -49,3 +49,8 @@ export const tasksState = atom<Task[]>({
     },
   ],
 })
+
+export const taskFilterState = atom({
+  key: 'taskFilterState',
+  default: 'all',
+})
