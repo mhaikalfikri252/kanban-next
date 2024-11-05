@@ -1,16 +1,18 @@
 'use client'
-import { tasksState } from '@/features/taskAtoms'
 import { Task, TASK_MODAL_TYPE } from '@/types'
 import { useRecoilValue } from 'recoil'
 import TaskListItem from './TaskListItem'
 import { TASK_PROGRESS_ID } from '@/constants'
 import { useState } from 'react'
 import TaskModal from '@/components/TaskModal'
+import FilterMenu from './FilterMenu'
+import { filteredTaskListState } from '@/features/taskSelector'
 
 const TaskList = (): JSX.Element => {
-  const tasks = useRecoilValue(tasksState)
+  const tasks = useRecoilValue(filteredTaskListState)
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false)
 
   return (
     <div className="w-full p-10">
@@ -30,9 +32,13 @@ const TaskList = (): JSX.Element => {
             defaultProgressOrder={TASK_PROGRESS_ID.NOT_STARTED}
           />
         )}
-        <button className="p-4 flex items-center bg-cyan-500 text-white gap-x-2 relative">
+        <button
+          className="p-4 flex items-center bg-cyan-500 text-white gap-x-2 relative"
+          onClick={(): void => setIsFilterOpen(true)}
+        >
           <span className="material-icons">sort</span>Filter tasks
         </button>
+        {isFilterOpen && <FilterMenu setIsFilterOpen={setIsFilterOpen} />}
       </div>
       <div>
         <div className="flex text-2xl border-b border-b-gray-300 *:p-4">

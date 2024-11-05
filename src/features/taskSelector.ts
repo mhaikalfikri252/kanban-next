@@ -1,5 +1,5 @@
 import { selector } from 'recoil'
-import { tasksState } from '@/features/taskAtoms'
+import { tasksState, taskFilterState } from '@/features/taskAtoms'
 import type { Task } from '@/types'
 import { SelectorKeys } from '@/constants'
 
@@ -45,5 +45,22 @@ export const completedTasksSelector = selector<Task[]>({
     return get(tasksState).filter((task) => {
       return task.progressOrder === 4
     })
+  },
+})
+
+export const filteredTaskListState = selector<Task[]>({
+  key: 'filteredTaskListState',
+  get: ({ get }) => {
+    const filter = get(taskFilterState)
+    const list = get(tasksState)
+
+    switch (filter) {
+      case 'completed':
+        return list.filter((task) => task.progressOrder === 4)
+      case 'uncompleted':
+        return list.filter((task) => task.progressOrder !== 4)
+      default:
+        return list
+    }
   },
 })
