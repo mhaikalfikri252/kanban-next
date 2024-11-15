@@ -43,18 +43,24 @@ const FilterMenu = ({ setIsFilterOpen }: FilterMenuProps): JSX.Element => {
       >
         close
       </span> */}
-
-      <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-        <option value="all" onClick={(): void => setIsFilterOpen(false)}>
-          All
-        </option>
-        <option value="completed" onClick={(): void => setIsFilterOpen(false)}>
-          Completed
-        </option>
-        <option value="uncompleted" onClick={(): void => setIsFilterOpen(false)}>
-          Uncompleted
-        </option>
+      <p>Choose Filter</p>
+      <select
+        value={filter}
+        onChange={(e) => {
+          setFilter(e.target.value)
+          setIsFilterOpen(false)
+        }}
+      >
+        <option value="all">All</option>
+        <option value="completed">Completed</option>
+        <option value="uncompleted">Uncompleted</option>
       </select>
+      <span
+        className="material-icons absolute top-1 right-1 cursor-pointer"
+        onClick={(): void => setIsFilterOpen(false)}
+      >
+        close
+      </span>
     </div>
   )
 }
