@@ -1,9 +1,11 @@
-import type { Task } from '@/types'
+import { TASK_MODAL_TYPE, type Task } from '@/types'
 import { TASK_PROGRESS_ID } from '@/constants'
 import TaskIcon from '../TaskIcon'
 import { useTasksAction } from '@/hooks/useTasksAction'
-import React, { useState } from 'react'
+import { useManageModal } from '@/hooks/useManageModal'
+import { ModalTypes } from '@/constants'
 import TaskMenu from '../TaskMenu'
+import TaskModal from '../TaskModal'
 
 interface TaskCardProps {
   task: Task
@@ -12,13 +14,16 @@ interface TaskCardProps {
 const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
   const isStarted = task.progressOrder === TASK_PROGRESS_ID.NOT_STARTED
   const { moveTaskCard } = useTasksAction()
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+  const { openModal, modal } = useManageModal()
 
   return (
     <div className="bg-green-200 p-6 rounded-xl my-2 flex flex-col gap-y-2 text-xl relative">
       <div className="flex justify-between">
         <TaskIcon task={task} />
-        <div className="material-icons cursor_pointer" onClick={(): void => setIsMenuOpen(true)}>
+        <div
+          className="material-icons cursor_pointer"
+          onClick={(): void => openModal(ModalTypes.TASKMENU, task)}
+        >
           more_vert
         </div>
       </div>
@@ -41,7 +46,17 @@ const TaskCard = ({ task }: TaskCardProps): JSX.Element => {
           </button>
         )}
       </div>
-      {isMenuOpen && <TaskMenu task={task} setIsMenuOpen={setIsMenuOpen} />}
+      {modal.typeModal === ModalTypes.TASKMENU && modal.props?.id === task.id && (
+        <TaskMenu task={task} />
+      )}
+      {modal.typeModal === ModalTypes.EDIT && modal.props?.id === task.id && (
+        <TaskModal
+          headingTitle="Edit Task"
+          type={TASK_MODAL_TYPE.EDIT}
+          task={task}
+          defaultProgressOrder={task.progressOrder}
+        />
+      )}
     </div>
   )
 }

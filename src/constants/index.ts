@@ -23,3 +23,10 @@ export const SelectorKeys = {
   WAITING_TASKS: 'waitingTasks',
   COMPLETED_TASKS: 'completedTasks',
 }
+
+export const ModalTypes = {
+  ADD: 'addTask',
+  EDIT: 'editTask',
+  TASKMENU: 'taskMenu',
+  FILTERMENU: 'filterMenu',
+}

@@ -1,5 +1,5 @@
 import { atom } from 'recoil'
-import type { Task } from '@/types'
+import type { ModalStates, Task } from '@/types'
 import { AtomKeys } from '@/constants'
 
 export const tasksState = atom<Task[]>({
@@ -53,4 +53,13 @@ export const tasksState = atom<Task[]>({
 export const taskFilterState = atom({
   key: 'taskFilterState',
   default: 'all',
+})
+
+export const activeModalState = atom<ModalStates>({
+  key: 'activeModalState',
+  default: {
+    isOpen: false,
+    typeModal: null,
+    props: null,
+  },
 })
